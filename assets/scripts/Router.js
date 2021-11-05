@@ -66,7 +66,7 @@ export class Router {
      *     and URL + hash to history
      *  4. Finally, call the stored function for the given page
      */
-    if(this)
+    if(this[page])
     {
       let hash = '';
       if(page == 'home')
@@ -80,14 +80,18 @@ export class Router {
 
       if(statePopped == false && window.location.hash != hash)
       {
-        history.pushState();
+        //this line is the problem
+        const state = {page: page};
+        const url = window.location.origin + hash;
+        history.pushState(state, '', url);
       }
-      this;
+      this[page]();
     }
     else
     {
-      console.error('Page Does Not Exist. Stupid');
-    }
-    
+      console.error('Page Does Not Exist.');
+      return;
+    } 
+
   }
 }
