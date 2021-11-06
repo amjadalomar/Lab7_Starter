@@ -77,10 +77,10 @@ export class Router {
       {
         hash = `#${page}`;
       }
-
-      if(statePopped == false && window.location.hash != hash)
+      console.log(hash);
+      if(!statePopped && window.location.hash != hash)
       {
-        //this line is the problem
+        console.log(page);
         const state = {page: page};
         const url = window.location.origin + hash;
         history.pushState(state, '', url);
